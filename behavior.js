@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
   var $body = $('body');
   $body.html('');
 
@@ -9,14 +9,19 @@ $(document).ready(function(){
   var $feed = $('<div></div>');
   $body.append($feed);
 
-  var printTweets = function() {
+  var printTweets = function () {
+    var tweet;
+    var $tweet;
+    var $user;
+    var $tweetTime;
+
     $feed.html('');
     var index = streams.home.length - 1;
-    while(index >= 0){
-      var tweet = streams.home[index];
-      var $tweet = $('<div></div>');
+    while (index >= 0) {
+      tweet = streams.home[index];
+      $tweet = $('<div></div>');
 
-      var $user = $('<a></a>');
+      $user = $('<a></a>');
       $user.text('@' + tweet.user);
       $user.addClass('username');
       $tweet.append($user);
@@ -24,7 +29,7 @@ $(document).ready(function(){
       $tweet.append(': ' + tweet.message);
       $tweet.addClass('tweet');
 
-      var $tweetTime = $('<span></span>');
+      $tweetTime = $('<span></span>');
       $tweetTime.text(tweet.created_at);
       $tweet.append($tweetTime);
       $tweetTime.addClass('timestamp');
@@ -40,9 +45,9 @@ $(document).ready(function(){
   printTweets();
 
   $($refreshLink).on("click", printTweets);
-  $($refreshLink2).on("click", function(e){
+  $($refreshLink2).on("click", function (e) {
     e.preventDefault();
-    printTweets()
+    printTweets();
   });
 
 });
