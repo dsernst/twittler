@@ -1,0 +1,22 @@
+body {
+	width: 750px;
+	margin: 0 auto;
+}
+
+#refreshLink {
+	margin: 0 30%;
+	font-size: 170%;
+}
+
+.tweet {
+  margin: 15px 0;
+}
+
+.username {
+	font-weight: bold;
+}
+
+.timestamp {
+	font-size: 75%;
+  float: right;
+}

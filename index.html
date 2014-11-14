@@ -3,6 +3,7 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <script>
@@ -11,8 +12,8 @@
         var $body = $('body');
         $body.html('');
 
-        var $refreshLink = $('<a href="#" id="checkTweets"></a>');
-        $refreshLink.text('check for new messages!');
+        var $refreshLink = $('<a href="#" id="refreshLink"></a>');
+        $refreshLink.text('Check for new messages');
         $body.prepend($refreshLink);
 
         var $feed = $('<div></div>');
@@ -24,20 +25,35 @@
           while(index >= 0){
             var tweet = streams.home[index];
             var $tweet = $('<div></div>');
-            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+
+            var $user = $('<a></a>');
+            $user.text('@' + tweet.user);
+            $user.addClass('username');
+            $tweet.append($user);
+
+            $tweet.append(': ' + tweet.message);
+            $tweet.addClass('tweet');
 
             var $tweetTime = $('<span></span>');
             $tweetTime.text(tweet.created_at);
             $tweet.append($tweetTime);
+            $tweetTime.addClass('timestamp');
 
             $tweet.appendTo($feed);
             index -= 1;
           }
         };
 
+        var $refreshLink2 = $refreshLink.clone();
+        $body.append($refreshLink2);
+
         printTweets();
 
-        $("#checkTweets").on("click", printTweets);
+        $($refreshLink).on("click", printTweets);
+        $($refreshLink2).on("click", function(e){
+          e.preventDefault();
+          printTweets()
+        });
 
       });
 
