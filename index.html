@@ -11,14 +11,28 @@
         var $body = $('body');
         $body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
+        var $refreshLink = $('<a href="#" id="checkTweets"></a>');
+        $refreshLink.text('check for new messages!');
+        $body.prepend($refreshLink);
+
+        var $feed = $('<div></div>');
+        $body.append($feed);
+
+        var printTweets = function() {
+          $feed.html('');
+          var index = streams.home.length - 1;
+          while(index >= 0){
+            var tweet = streams.home[index];
+            var $tweet = $('<div></div>');
+            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            $tweet.appendTo($feed);
+            index -= 1;
+          }
+        };
+
+        printTweets();
+
+        $("#checkTweets").on("click", printTweets);
 
       });
 
