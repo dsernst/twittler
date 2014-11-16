@@ -6,6 +6,8 @@ $(document).ready(function () {
   $refreshLink.text('Check for new messages');
   $body.prepend($refreshLink);
 
+  $body.append('<h1>dsernst\'s Twittler</h1>');
+
   var $feed = $('<div></div>');
   $body.append($feed);
 
