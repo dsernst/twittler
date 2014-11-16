@@ -16,6 +16,7 @@ $(document).ready(function () {
     var $tweetTime;
     var source;
     var index;
+    var readableTime;
 
     $feed.html('');
 
@@ -40,7 +41,8 @@ $(document).ready(function () {
       $tweet.addClass('tweet');
 
       $tweetTime = $('<span></span>');
-      $tweetTime.text(tweet.created_at);
+      readableTime = moment(tweet.created_at).fromNow();
+      $tweetTime.text(readableTime);
       $tweet.append($tweetTime);
       $tweetTime.addClass('timestamp');
 
