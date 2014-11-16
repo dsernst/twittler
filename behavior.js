@@ -45,6 +45,11 @@ $(document).ready(function () {
 
       $tweet.appendTo($feed);
     }
+
+    $('.username').on('click', function (e) {
+      e.preventDefault();
+      printTweets($(this).data('user'));
+    });
   };
 
   $refreshLink.clone().appendTo($body);
@@ -55,10 +60,4 @@ $(document).ready(function () {
     e.preventDefault();
     printTweets('all');
   });
-
-  $('.username').on('click', function (e) {
-    e.preventDefault();
-    printTweets($(this).data('user'));
-  });
-
 });
