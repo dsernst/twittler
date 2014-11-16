@@ -9,19 +9,29 @@ $(document).ready(function () {
   var $feed = $('<div></div>');
   $body.append($feed);
 
-  var printTweets = function () {
+  var printTweets = function (context) {
     var tweet;
     var $tweet;
     var $user;
     var $tweetTime;
+    var source;
+    var index;
 
     $feed.html('');
-    var index = streams.home.length - 1;
-    while (index >= 0) {
-      tweet = streams.home[index];
+
+    if (context === "all") {
+      source = streams.home; // {streams} comes from data_generator.js
+    } else if (context) {
+      source = streams.users[context];
+    }
+
+    for (index = source.length - 1; index >= 0; index -= 1) {
+      tweet = source[index];
       $tweet = $('<div></div>');
 
       $user = $('<a></a>');
+      $user.data({user: tweet.user});
+      $user.attr({'href': '#'});
       $user.text('@' + tweet.user);
       $user.addClass('username');
       $tweet.append($user);
@@ -35,19 +45,25 @@ $(document).ready(function () {
       $tweetTime.addClass('timestamp');
 
       $tweet.appendTo($feed);
-      index -= 1;
     }
   };
 
   var $refreshLink2 = $refreshLink.clone();
   $body.append($refreshLink2);
 
-  printTweets();
+  var printAll = function () {
+    printTweets("all");
+  };
 
-  $($refreshLink).on("click", printTweets);
+  printAll();
+
+  $($refreshLink).on("click", printAll);
   $($refreshLink2).on("click", function (e) {
     e.preventDefault();
-    printTweets();
+    printAll();
+  });
+  $('.username').on('click', function () {
+    printTweets($(this).data('user'));
   });
 
 });
