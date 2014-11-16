@@ -1,15 +1,12 @@
 $(document).ready(function () {
   var $body = $('body');
-  $body.html('');
 
-  var $refreshLink = $('<a href="#" id="refreshLink"></a>');
+  var $refreshLink = $('<a href="#" class="refreshLink"></a>');
   $refreshLink.text('Check for new messages');
-  $body.prepend($refreshLink);
-
-  $body.append('<h1>dsernst\'s Twittler</h1>');
+  $refreshLink.prependTo($body);
 
   var $feed = $('<div></div>');
-  $body.append($feed);
+  $feed.appendTo($body);
 
   var printTweets = function (context) {
     var tweet;
@@ -31,42 +28,36 @@ $(document).ready(function () {
     for (index = source.length - 1; index >= 0; index -= 1) {
       tweet = source[index];
       $tweet = $('<div></div>');
-
-      $user = $('<a></a>');
-      $user.data({user: tweet.user});
-      $user.attr({'href': '#'});
-      $user.text('@' + tweet.user);
-      $user.addClass('username');
-      $tweet.append($user);
-
-      $tweet.append(': ' + tweet.message);
       $tweet.addClass('tweet');
 
+      $user = $('<a></a>');
+      $user.attr({'href': '#', 'data-user': tweet.user, 'class': 'username'});
+      $user.text('@' + tweet.user);
+      $user.appendTo($tweet);
+
+      $tweet.append(': ' + tweet.message);
+
       $tweetTime = $('<span></span>');
+      $tweetTime.addClass('timestamp');
       readableTime = moment(tweet.created_at).fromNow();
       $tweetTime.text(readableTime);
-      $tweet.append($tweetTime);
-      $tweetTime.addClass('timestamp');
+      $tweetTime.appendTo($tweet);
 
       $tweet.appendTo($feed);
     }
   };
 
-  var $refreshLink2 = $refreshLink.clone();
-  $body.append($refreshLink2);
+  $refreshLink.clone().appendTo($body);
 
-  var printAll = function () {
-    printTweets('all');
-  };
+  printTweets('all');
 
-  printAll();
-
-  $($refreshLink).on('click', printAll);
-  $($refreshLink2).on('click', function (e) {
+  $('.refreshLink').on('click', function (e) {
     e.preventDefault();
-    printAll();
+    printTweets('all');
   });
-  $('.username').on('click', function () {
+
+  $('.username').on('click', function (e) {
+    e.preventDefault();
     printTweets($(this).data('user'));
   });
 

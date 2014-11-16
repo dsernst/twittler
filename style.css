@@ -4,7 +4,7 @@ body {
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-#refreshLink {
+.refreshLink {
 	float: right;
 	margin: 5px 0;
 	color: #fff;
@@ -21,7 +21,7 @@ body {
 	text-decoration: none;
 }
 
-#refreshLink:hover {
+.refreshLink:hover {
 	background-color: #449d44;
 	border-color: #398439;
 }
