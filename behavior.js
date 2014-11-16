@@ -19,7 +19,7 @@ $(document).ready(function () {
 
     $feed.html('');
 
-    if (context === "all") {
+    if (context === 'all') {
       source = streams.home; // {streams} comes from data_generator.js
     } else if (context) {
       source = streams.users[context];
@@ -52,13 +52,13 @@ $(document).ready(function () {
   $body.append($refreshLink2);
 
   var printAll = function () {
-    printTweets("all");
+    printTweets('all');
   };
 
   printAll();
 
-  $($refreshLink).on("click", printAll);
-  $($refreshLink2).on("click", function (e) {
+  $($refreshLink).on('click', printAll);
+  $($refreshLink2).on('click', function (e) {
     e.preventDefault();
     printAll();
   });
