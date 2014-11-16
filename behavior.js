@@ -5,6 +5,9 @@ $(document).ready(function () {
   $refreshLink.text('Check for new messages');
   $refreshLink.prependTo($body);
 
+  var $input = $('<input type="text" placeholder="Write a new message... then press Enter"></input>');
+  $input.appendTo($body);
+
   var $feed = $('<div></div>');
   $feed.appendTo($body);
 
@@ -59,5 +62,17 @@ $(document).ready(function () {
   $('.refreshLink').on('click', function (e) {
     e.preventDefault();
     printTweets('all');
+  });
+
+  $('input').keypress(function (e) {
+    if (e.which === 13) {
+      window.visitor = 'guest';
+      if (!streams.users[window.visitor]) {
+        streams.users[window.visitor] = [];
+      }
+      writeTweet($(this).val());
+      $(this).val('');
+      printTweets('all');
+    }
   });
 });
