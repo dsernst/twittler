@@ -1,3 +1,4 @@
+/*global streams, moment, window, writeTweet*/
 $(document).ready(function () {
   var $main = $('.main');
 
