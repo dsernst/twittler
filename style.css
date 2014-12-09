@@ -60,3 +60,9 @@ input:focus {
 	font-size: 75%;
 	float: right;
 }
+
+footer {
+  margin: 73px 0px 0px;
+	text-align: center;
+	font-size: 70%;
+}

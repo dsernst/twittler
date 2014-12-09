@@ -1,15 +1,15 @@
 $(document).ready(function () {
-  var $body = $('body');
+  var $main = $('.main');
 
   var $refreshLink = $('<a href="#" class="refreshLink"></a>');
   $refreshLink.text('Check for new messages');
-  $refreshLink.prependTo($body);
+  $refreshLink.prependTo($main);
 
   var $input = $('<input type="text" placeholder="Write a new message... then press Enter"></input>');
-  $input.appendTo($body);
+  $input.appendTo($main);
 
   var $feed = $('<div></div>');
-  $feed.appendTo($body);
+  $feed.appendTo($main);
 
   var printTweets = function (context) {
     var tweet;
@@ -55,7 +55,7 @@ $(document).ready(function () {
     });
   };
 
-  $refreshLink.clone().appendTo($body);
+  $refreshLink.clone().appendTo($main);
 
   printTweets('all');
 
